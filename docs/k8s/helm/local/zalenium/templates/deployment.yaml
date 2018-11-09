@@ -105,6 +105,14 @@ spec:
             - name: TESTINGBOT_SECRET
               value: {{ .Values.hub.testingBotSecret }}
             {{- end }}
+            {{- if and .Values.hub.proxy .Values.hub.proxy.http }}
+            - name: zalenium_http_proxy
+              value: {{ .Values.proxy.http }}
+            {{- end }}
+            {{- if and .Values.hub.proxy .Values.hub.proxy.https }}
+            - name: zalenium_https_proxy
+              value: {{ .Values.hub.proxy.https }}
+            {{- end }}
           args:
             - start
             - '--desiredContainers'
